@@ -6,3 +6,5 @@ Nous avons créé un site web côté client pour passer des commandes de pizzas,
 Le site web a été développé en HTML, CSS, JavaScript et PHP, tandis qu'une application pour les pizzaiolos a été conçue pour visualiser et préparer les commandes. Les commandes étaient mises à jour en temps réel, et un chronomètre indiquait le délai de livraison, déclenchant des réductions si le délai était dépassé.
 
 Nous avons réalisé une analyse fonctionnelle, une analyse détaillée, une planification de projet et une maquette, le tout réuni dans un dossier d'analyse. Les systèmes ont été interconnectés à une base de données développée en SQL et PL/SQL via phpMyAdmin.
+
+**Attention :** Tout le code contenu dans ce dépôt est la propriété exclusive de BOISSERIE Estelle. Vous êtes libre de consulter et d'explorer le code, mais **vous n'êtes pas autorisé à le copier, le modifier, ou l'utiliser à des fins commerciales sans mon autorisation explicite**.
