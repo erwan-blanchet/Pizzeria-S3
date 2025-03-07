@@ -1,0 +1,34 @@
+    <main>
+        <div class="profilCreation">
+            <h2>Veuillez saisir vos données bancaire </h2>
+            <form action="./routeur.php?controleur=controlleurObjet&action=payerCommande" method="post">
+                <label for="cryptogramme">Cryptogramme :</label>
+                <input type="text" id="cryptogramme" name="cryptogramme" required>
+
+                <label for="datePeremption">Date de péremption :</label>
+                <input type="date" id="datePeremption" name="datePeremption">
+
+                <label for="nom">Nom du porteur :</label>
+                <input type="text" id="nom" name="nom" required>
+
+                <button type="submit" name="valider" class="btn">Valider</button>
+            </form>
+            <a href="javascript:history.back()" class="btn">Retour</a>
+        </div>
+        <script>
+            function formatDate() {
+                // Récupérer la valeur de la date
+                var selectedDate = document.getElementById("datePicker").value;
+                // Convertir la date au format xx/xx/xxxx
+                var formattedDate = new Date(selectedDate);
+                var day = formattedDate.getDate();
+                var month = formattedDate.getMonth() + 1;
+                var year = formattedDate.getFullYear();
+                // Ajouter un zéro devant le jour et le mois si nécessaire
+                day = day < 10 ? "0" + day : day;
+                month = month < 10 ? "0" + month : month;
+                // Format final xx/xx/xxxx
+                var finalFormat = day + "/" + month + "/" + year;
+            }
+        </script>
+    </main>

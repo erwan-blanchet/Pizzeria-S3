@@ -1,0 +1,19 @@
+<div class="sidebar">
+    <button class="bouton-menu" onclick="ouvrirMenu()"></button>
+    <div class="menu">
+      <nav>
+        <a href="routeur.php?controleur=controlleurObjet&action=acceuilGestionnaire" class="bouton">Acceuil</a>
+        <a href="routeur.php?controleur=controlleurObjet&action=recettesGestionnaire" class="bouton">Les recettes</a>
+        <a href="routeur.php?controleur=controlleurObjet&action=stocksGestionnaire" class="bouton">Les stocks</a>
+        <a href="routeur.php?controleur=controlleurObjet&action=alerteCreer" class="bouton">Les alertes</a>
+        <?php
+          // Récupérer l'année en cours
+          $anneeEnCours = date("Y");
+          echo "<a href='routeur.php?controleur=controlleurObjet&action=statistiquesGestionnaire&idStatistique=$anneeEnCours' class='bouton'>Les statistiques</a>";
+        ?>
+    </div>
+    <script>
+      const ouvrirMenu = () => document.body.classList.toggle("open");
+    </script>
+  </div>
+

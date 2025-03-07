@@ -1,0 +1,74 @@
+/**************************
+**   Estelle BOISSERIE   **
+***************************/
+
+
+
+/* IMPORTER LES CSS */
+
+@import url("connexion.css");
+@import url("acceuil.css");
+@import url("menu.css");
+@import url("droits.css");
+@import url("articles.css");
+@import url("details.css");
+@import url("ajout.css");
+@import url("personnaliser.css");
+@import url("profil.css");
+@import url("creerProfil.css");
+@import url("panier.css");
+@import url("alertes.css");
+@import url("fin.css");
+
+
+
+
+/* MISE EN PAGE DES ELEMENTS COMMUN */
+body {
+    background-color: black;
+    font-family: 'Segoe UI';
+}
+
+.page{
+    grid-template-rows: 1fr 2fr 2fr 1fr;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+}
+
+
+h2 {
+    font-size: 30px;
+    margin: 10px;
+}
+
+h3 {
+    font-size: 25px;
+    margin: 10px;
+}
+
+h4 {
+    font-size: 20px;
+    margin: 10px;
+}
+
+p{
+    font-size: 15px;
+    text-align: justify;
+}
+
+@media (max-width: 1200px) {
+    body {
+        font-family: 'Segoe UI';
+        grid-template-columns: 1fr;
+        grid-template-rows: 10% 30% 30% 10%;
+        grid-template-areas:
+            "header"
+            "sidebar"
+            "main"
+            "footer";
+    }
+}
+
+

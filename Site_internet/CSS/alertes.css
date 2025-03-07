@@ -1,0 +1,20 @@
+/**************************
+**   Estelle BOISSERIE   **
+***************************/
+
+.en-tete-tbl-alertes {
+    text-align: justify;
+    width: 100%;
+}
+
+.btn-area {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    align-content: space-around;
+}
+
+.infos-fournisseur {
+    text-align: justify;
+}

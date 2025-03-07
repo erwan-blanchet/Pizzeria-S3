@@ -1,0 +1,46 @@
+/**************************
+**   Estelle BOISSERIE   **
+***************************/
+
+
+
+/* MISE EN PAGE DU PROFIL */
+
+.profil {
+    background-color: white;
+    padding: 20px;
+}
+
+.profil h2 {
+    text-align: center;
+}
+
+.btn-formulaire {
+    border: 0;
+    background: linear-gradient(90deg, #D90718, #D91438);
+    color: white;
+    padding: 10px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+}
+
+.profil table {
+    margin: 28px;
+    margin-left: 30%;
+}
+
+.profil td {
+    margin: 10px;
+}
+
+.info-Profil {
+    margin-left: 10%;
+}
+
+.btn-profil {
+    display: flex;
+    margin: 50px 0px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+}

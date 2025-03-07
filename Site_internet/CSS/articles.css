@@ -1,0 +1,110 @@
+/**************************
+**   Estelle BOISSERIE   **
+***************************/
+
+
+
+/* MISE EN PAGE DES PIZZAS ET PRODUITS */
+.btn-choix {
+    position: relative;
+    display: inline-block;
+}
+
+.btn-choix button {
+    background-color: #D91438;
+    margin-left: 30px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 15px;
+    border: none;
+}
+
+.choix {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.btn-choix:hover .choix {
+    display: block;
+}
+
+.btn-choix:hover .choix a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin-bottom: 5px; 
+}
+
+.article {
+    align-items: center;
+    margin: 100px 10px 10px 10px;
+    padding: 0px 20px 40px 20px;
+    width: 40%;
+    border-radius: 15px;
+    position: relative;
+    background: #ffffff;
+    text-align: center;
+    box-shadow: 30px 20px 10px rgb(0 0 0 / 8%);
+}
+
+.article .img-Pizza {
+    height: 150px;
+    object-fit: cover;
+    margin-top: -50px;
+    border-radius: inherit;
+}
+
+.article .img-Produit {
+    height: 150px;
+    object-fit: cover;
+    margin-top: -50px;
+    border-radius: inherit;
+}
+
+.boutton {
+    border: 0;
+    background: linear-gradient(90deg, #D90718, #D91438);
+    color: #f8f8f8;
+    padding: 16px;
+    border-radius: 40px;
+    top : 15px;
+    position: relative;
+    white-space: nowrap; 
+    text-decoration: none;
+}
+
+.boutton a {
+    text-decoration: none;
+}
+
+.article-Presentation{
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.presentation-articles{
+    padding: 100px 20px;
+}
+
+.contenu-main {
+    padding: 50px 0px;
+}
+
+.une-partie-produit {
+    margin: 100px 0px 200px 0px;
+}
+
+.statistiques {
+    text-align: justify;
+}

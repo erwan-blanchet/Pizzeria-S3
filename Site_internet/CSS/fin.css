@@ -1,0 +1,54 @@
+/**************************
+**   Estelle BOISSERIE   **
+***************************/
+
+
+
+/* MISE EN PAGE DU FOOTER */
+
+footer {
+    padding: 40px;
+    background-color: black;
+    color: #F2D888;
+    margin-top: 40px;
+    text-align: center;
+}
+  
+footer #menu-footer {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    font-size: medium;
+    line-height: 1.6;
+    margin-bottom: 0;
+    display: inline-flex;
+}
+  
+footer li {
+    padding: 10px;
+}
+  
+footer #menu-footer a {
+    color:inherit;
+    text-decoration:none;
+    opacity:0.8;
+    font-size: 25px;
+}
+  
+footer #menu-footer a:hover {
+    opacity:1;
+}
+
+.copyright {
+    margin-top:15px;
+    text-align:center;
+    font-size: 20px;
+    color:#F2D888;
+    margin-bottom:0;
+}
+
+@media (max-width: 1200px) {
+    footer #menu-footer a {
+        font-size: 15px;
+    }
+}

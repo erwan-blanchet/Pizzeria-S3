@@ -1,0 +1,58 @@
+    <header>
+        <div id="En-tete">
+            <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+            <div id="slogan">
+                <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+            </div>
+            <?php 
+                // Récupérer le numéro de commande depuis la session
+                $numeroCommande = $_SESSION['numeroCommande'];
+                // Inclure le controleur de pizza
+                require_once("./Modele/commande.php");
+                // Appeler la méthodes
+                $quantite = commande::getQuantiteCommande($numeroCommande); 
+                // Créer un bouton pour consulter le panier
+                echo "<a href='routeur.php?controleur=controlleurObjet&action=panier' class='lien-panier'><img src='./Images/panier.png' alt='Icône du panier' class='panier-icon'><div class='vignette-nbArticle' id='nombreArticles'>" . $quantite . "</div></a>";
+            ?>
+            <div id="connexion">
+                <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="contenu-detail">
+            <?php
+                // Inclure le modèle de produit
+                require_once("./Modele/produit.php");
+                // Récupérer l'identifiant du produit
+                $idProduit = $_GET['idProduit'];
+                // Récupérer les détails du produit
+                $produitDetails = produit::getDetailProduit($idProduit);
+            ?>
+            <h2 class="nom-Article"><?php echo $produitDetails['NomProduit']; ?></h2>
+            <table>
+                <tr>
+                    <td><?php 
+                        $image = "<img src='{$produitDetails['PhotoProduit']}' alt='Image du produit {$produitDetails['NomProduit']}'>";
+                        echo $image; 
+                        ?>
+                    </td>
+                    <td><div class="prix-Article"><h3><?php echo $produitDetails['PrixProduit']; ?>€ </h3></div><p><u>Description :</u> <?php echo $produitDetails['DescriptionProduit']; ?></p></td>
+                </tr>
+                <tr>
+                    <td><p><em>Cette image est une représentation et n'engage pas le résultat.</em></p></td>
+                    <td>
+                        <?php 
+                            require_once("./Modele/produit.php");
+                            $produit = produit::getDetailProduit($idProduit);
+                        echo "<a href='routeur.php?controleur=controlleurObjet&action=produitCommande&idProduit={$produit['idProduit']}' class='btn'>Commander</a>";
+                        ?>
+                    </td>
+                    <td>
+                        <a href="javascript:history.back()" class="btn">Retour</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </main>

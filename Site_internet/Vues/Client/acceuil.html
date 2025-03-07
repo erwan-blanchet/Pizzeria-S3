@@ -1,0 +1,112 @@
+  <header>
+    <div id="En-tete">
+        <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+        <div id="slogan">
+          <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+        </div>
+        <?php 
+          // Récupérer le numéro de commande depuis la session
+          $numeroCommande = $_SESSION['numeroCommande'];
+          // Inclure le controleur de pizza
+          require_once("./Modele/commande.php");
+          // Appeler la méthodes
+          $quantite = commande::getQuantiteCommande($numeroCommande); 
+          // Créer un bouton pour consulter le panier
+          echo "<a href='routeur.php?controleur=controlleurObjet&action=panier' class='lien-panier'><img src='./Images/panier.png' alt='Icône du panier' class='panier-icon'><div class='vignette-nbArticle' id='nombreArticles'>" . $quantite . "</div></a>";
+        ?>
+        <div id="connexion">
+          <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+        </div>
+      </div>
+    </header>
+  
+    <main>
+
+      <video id="video_pub" autoplay muted loop>
+        <source src="Images/PUB.mp4" type="video/mp4">
+      </video>
+
+      <section class="A-la-une">
+        <h2>Nos pizzas de saison :</h2>
+        <div class="A-la-une_produits">
+          <?php 
+            // Inclure le controleur de pizza
+            require_once("./Controlleurs/controlleurPizza.php");
+            // Appeler la méthodes
+            $pizzas = controlleurPizza::pizzaTheme(); 
+            // Pour chaque pizza renvoyée
+            foreach ($pizzas as $pizza) {
+              echo "<div class='article'>";
+                // Construction de l'image
+                $image = "<img class='img-Pizza' src='{$pizza->get('PhotoPizza')}' alt='Image de la pizza {$pizza->get('NomPizza')}'>";
+                // Afficher l'image
+                echo $image;
+                // Afficher le nom de la pizza en gras
+                echo "<div class='nom'><h4>" . $pizza->get("NomPizza") . "</h4></div>"; 
+                // Afficher le prix de la pizza en gras, rouge et moins grand
+                echo "<div class='prix'><h3>" . $pizza->get("PrixPizza") . "€</h3></div>"; 
+                // Afficher la description de la pizza en souligné
+                echo "<div class='description-text'><u>Description :</u>      " . $pizza->get("DescriptionPizza") . "</div>"; 
+                echo "<a href='routeur.php?controleur=controlleurObjet&action=detailPizza&idPizza={$pizza->get('idPizza')}' class='boutton'>Commander</a>";
+              echo "</div>";
+            }
+          ?>
+        </div>
+      </section>
+  
+      <section class="A-la-une">
+        <h2>Nos boissons :</h2>
+        <div class="A-la-une_produits">
+          <?php 
+            // Inclure le controleur de produit
+            require_once("./Controlleurs/controlleurProduit.php");
+            // Appeler la méthodes
+            $boissons = controlleurProduit::getBoissonsALaUne(); 
+            // Pour chaque boisson renvoyée
+            foreach ($boissons as $boisson) {
+              echo "<div class='article'>";
+                // Construction de l'image
+                $image = "<img class='img-Produit' src='{$boisson->get('PhotoProduit')}' alt='Image de la boisson {$boisson->get('NomProduit')}'>";
+                // Afficher l'image
+                echo $image;
+                // Afficher le nom de la boisson en gras
+                echo "<div class='nom'><h4>" . $boisson->get('NomProduit') . "</h4></div>";
+                // Afficher le prix de la boisson en gras, rouge et moins grand
+                echo "<div class='prix'><h3>" . $boisson->get("PrixProduit") . "€</h3></div>"; 
+                // Afficher la description de la boisson en souligné
+                echo "<div class='description-text'><u>Description :</u>  " . $boisson->get("DescriptionProduit") . "</div>"; 
+                echo "<a href='routeur.php?controleur=controlleurObjet&action=detailProduitClient&idProduit={$boisson->get('idProduit')}' class='boutton'>Commander</a>";
+              echo "</div>";
+            }
+          ?>
+        </div>
+      </section>    
+  
+      <section class="A-la-une">
+        <h2>Nos desserts :</h2>
+        <div class="A-la-une_produits">
+          <?php 
+            // Inclure le controleur de produit
+            require_once("./Controlleurs/controlleurProduit.php");
+            // Appeler la méthodes
+            $desserts = controlleurProduit::getDessertsALaUne(); 
+            // Pour chaque dessert renvoyé
+            foreach ($desserts as $dessert) {
+              echo "<div class='article'>";
+                // Construction de l'image
+                $image = "<img class='img-Produit' src='{$dessert->get('PhotoProduit')}' alt='Image du dessert {$dessert->get('NomProduit')}'></a>";
+                // Afficher l'image
+                echo $image;
+                // Afficher le nom du dessert en gras
+                echo "<div class='nom'><h4>" . $dessert->get("NomProduit") . "</h4></div>"; 
+                // Afficher le prix du dessert en gras, rouge et moins grand
+                echo "<div class='prix'><h3>" . $dessert->get("PrixProduit") . "€</h3></div>"; 
+                // Afficher la description du dessert en souligné
+                echo "<div class='description-text'><u>Description :</u>  " . $dessert->get("DescriptionProduit") . "</div>"; 
+                echo "<a href='routeur.php?controleur=controlleurObjet&action=detailProduitClient&idProduit={$dessert->get('idProduit')}' class='boutton'>Commander</a>";
+              echo "</div>";
+            }
+          ?>
+        </div>
+      </section>
+    </main>

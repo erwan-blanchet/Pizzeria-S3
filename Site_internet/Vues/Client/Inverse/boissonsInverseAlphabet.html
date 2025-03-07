@@ -1,0 +1,57 @@
+  <header>
+    <div id="En-tete">
+        <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+        <div id="slogan">
+          <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+        </div>
+        <?php 
+          // Récupérer le numéro de commande depuis la session
+          $numeroCommande = $_SESSION['numeroCommande'];
+          // Inclure le controleur de pizza
+          require_once("./Modele/commande.php");
+          // Appeler la méthodes
+          $quantite = commande::getQuantiteCommande($numeroCommande); 
+          // Créer un bouton pour consulter le panier
+          echo "<a href='routeur.php?controleur=controlleurObjet&action=panier' class='lien-panier'><img src='./Images/panier.png' alt='Icône du panier' class='panier-icon'><div class='vignette-nbArticle' id='nombreArticles'>" . $quantite . "</div></a>";
+        ?>
+        <div id="connexion">
+          <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+      </div>
+    </div>
+  </header>
+  
+  <main class="presentation-articles">
+    <h2>Nos boissons :</h2>
+    <div class="btn-choix">
+      <button>Trier par </button>
+      <div class="choix">
+        <a href="routeur.php?controleur=controlleurObjet&action=boissonsClient">Ordre alphabétique</a>
+        <a href="routeur.php?controleur=controlleurObjet&action=boissonsCroissant">Prix croissant</a>
+        <a href="routeur.php?controleur=controlleurObjet&action=boissonsDecroissant">Prix décroissant</a>
+      </div>
+    </div>
+    <section class="article-Presentation">
+      <?php 
+        // Inclure le controleur de produit
+        require_once("./Modele/produit.php");
+        // Appeler la méthodes
+        $boissons = produit::getBoissonInverseAlphabetique(); 
+        // Pour chaque boisson renvoyée
+        foreach ($boissons as $boisson) {
+          echo "<div class='article'>";
+            // Construction de l'image
+            $image = "<img class='img-Produit' src='{$boisson->get('PhotoProduit')}' alt='Image de la boisson {$boisson->get('NomProduit')}'>";
+            // Afficher l'image
+            echo $image;
+            // Afficher le nom de la boisson en gras
+            echo "<div class='nom'><h4>" . $boisson->get('NomProduit') . "</h4></div>";  // Correction ici
+            // Afficher le prix de la boisson en gras, rouge et moins grand
+            echo "<div class='prix'><h3>" . $boisson->get("PrixProduit") . "€</h3></div>"; 
+            // Afficher la description de la boisson en souligné
+            echo "<div class='description-text'><u>Description :</u>    " . $boisson->get("DescriptionProduit") . "</div>"; 
+            echo "<a href='routeur.php?controleur=controlleurObjet&action=detailProduitClient&idProduit={$boisson->get('idProduit')}' class='boutton'>Commander</a>";
+          echo "</div>";
+        }
+      ?>
+    </section>
+  </main>

@@ -1,0 +1,65 @@
+    <header>
+        <div id="En-tete">
+            <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+            <div id="slogan">
+                <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+            </div>
+            <div id="connexion">
+                <a href="routeur.php?controleur=controlleurObjet&action=profilGestionnaire"><span>Mon profil</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="contenu-detail">
+            <?php
+                // Inclure le modèle de produit
+                require_once("./Modele/produit.php");
+                // Récupérer l'identifiant du produit
+                $idProduit = $_GET['idProduit'];
+                // Récupérer les détails du produit
+                $produitDetails = produit::getDetailProduit($idProduit);
+            ?>
+            <h2 class="nom-Article"><?php echo $produitDetails['NomProduit']; ?></h2>
+            <table>
+                <tr>
+                    <td><?php 
+                            $image = "<img class='img-presentation-detail' src='{$produitDetails['PhotoProduit']}' alt='Image du produit {$produitDetails['NomProduit']}'>";
+                            echo $image; 
+                        ?>
+                    </td>
+                    <td><div class="prix-Article"><u>Quantité en stock : </u><?php echo $produitDetails['QuantiteEnStockProduit']; ?></div><u>Date achat :</u> <?php echo $produitDetails['DateAchatProduit']; ?></td>
+                </tr>
+                <tr>
+                    <td><u>Fournisseur :</u> <?php echo $produitDetails['NomFournisseur']; ?></td>
+                    <td><u>Prix d'achat :</u> <?php echo $produitDetails['PrixAchatProduit']; ?> €</td>
+                </tr>
+                <tr>
+                    <td>
+                        <?php 
+                            require_once("./Modele/produit.php");
+                            $produit = produit::getDetailProduit($idProduit);
+                            echo "<a href='routeur.php?controleur=controlleurObjet&action=infoFournisseur&idProduit={$produit['idProduit']}' class='btn'>Faire un réapprovisionnement</a>";
+                        ?>
+                    </td>
+                    <td>
+                        <?php 
+                            require_once("./Modele/produit.php");
+                            $produit = produit::getDetailProduit($idProduit);
+                            echo "<a href='routeur.php?controleur=creerAlerteProduit&action=creationAlerteProduit&idProduit={$produit['idProduit']}' class='btn'>Créer une alerte</a>";
+                        ?>
+                    </td>
+                    <td>
+                        <?php 
+                            require_once("./Modele/ingredient.php");
+                            $ingredient = ingredient::getDetailIngredient($idIngredient);
+                            echo "<a href='routeur.php?controleur=controlleurObjet&action=supprimerProduitGestionnaire&idPizza={$pizza->get('idPizza')}&idIngredient={$ingredient['idIngredient']}' class='btn'>Créer une alerte</a>";
+                        ?>
+                    </td>
+                    <td>
+                        <a href="javascript:history.back()" class="btn">Retour</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </main>

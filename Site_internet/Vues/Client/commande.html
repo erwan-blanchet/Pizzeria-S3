@@ -1,0 +1,70 @@
+    <header>
+        <div id="En-tete">
+            <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+            <div id="slogan">
+                <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+            </div>
+            <div id="connexion">
+                <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="tableau-Panier">
+            <ul class="onglet">
+                <!-- Titres des onglets -->
+                <?php
+                    // Inclure le modèle de commande
+                    require_once("./Modele/commande.php");
+                    // Récupérer les informations du client depuis la session
+                    $idClient = $_SESSION['idClient'];
+                    // Récupérer les produits du panier
+                    $commandes = commande::getMesCommandes($idClient);
+                    // Si aucune commande effectué
+                    if ($commandes !== false || !empty($commandes)) {
+                        // Pour chaque commande renvoyée
+                        foreach ($commandes as $commande) {
+                                echo "<li><a href='#contenu-{$commande['numCommande']}'> Commande n°" . $commande['numCommande'] . "</a></li>";
+                        }
+                    } 
+                    else {
+                        echo "<li>Aucune commmande</li>";
+                    }
+                ?>
+
+            </ul>
+            <div class="details-Articles">
+                <!-- Contenu des onglets-->
+                <?php 
+                    // Inclure le modèle de commande
+                    require_once("./Modele/commande.php");
+                    // Récupérer les informations du client depuis la session
+                    $idClient = $_SESSION['idClient'];
+                    // Récupérer les produits du panier
+                    $commandes = commande::getMesCommandes($idClient);
+                    if ($commandes !== false || !empty($commandes)) {
+                        // Pour chaque commande renvoyé
+                        foreach ($commandes as $commande) {
+                            echo "<section id='contenu-{$commande['numCommande']}' class='contenu'>";
+                            echo "<h2>Commande n°". $commande['numCommande'] ."</h2>";
+                            echo "<ul>";
+                                echo "<li><strong>Date de commande :</strong>". $commande['DateCommande'] ."</li>";
+                                echo "<li><strong>Status de votre commande :</strong>". $commande['StatutCommande'] ."</li>";
+                                echo "<li><strong>Total du montant de votre commande :</strong>". $commande['TotalCommande'] ."</li>";
+                            echo "</ul>";
+                            echo "</section>";
+                        }
+                    }
+                    else{
+                        echo "";
+                    }
+                ?>
+            </div>
+        </div>
+        <div class="btn-panier-commande">
+            <a href="routeur.php?controleur=controlleurObjet&action=profilClient" class="btn">Retour</a>
+            <a href="routeur.php?controleur=controlleurObjet&action=annuler" class="btn">Annuler</a>
+            <a href="routeur.php?controleur=controlleurObjet&action=livrer" class="btn">Livré</a>
+        </div>
+    </main>

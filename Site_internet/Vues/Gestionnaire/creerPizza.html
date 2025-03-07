@@ -1,0 +1,65 @@
+<header>
+    <div id="En-tete">
+        <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+        <div id="slogan">
+            <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+        </div>
+        <div id="connexion">
+            <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="profilCreation">
+        <h2>Créer une pizza</h2>
+        <form action="./routeur.php?controleur=controlleurObjet&action=creationPizzaGestionnaire" method="post" enctype="multipart/form-data">
+            <label for="nomCreation">Nom de la pizza :</label>
+            <input type="text" id="nomCreation" name="nomCreation" required>
+
+            <label for="descriptionCreation">Description de la pizza :</label>
+            <input type="text" id="descriptionCreation" name="descriptionCreation" required>
+
+            <label for="imageCreation">Choisir une image :</label>
+            <input type="file" id="imageCreation" name="imageCreation" accept="image/png">
+
+
+            <label>Thème de la pizza :</label>
+            <label>
+                <input type="radio" name="themeCreation" value="Hivers">
+                Hivers
+            </label>
+            <label>
+                <input type="radio" name="themeCreation" value="Printemps">
+                Printemps
+            </label>
+            <label>
+                <input type="radio" name="themeCreation" value="Ete">
+                Ete
+            </label>
+            <label>
+                <input type="radio" name="themeCreation" value="Automne">
+                Automne
+            </label>
+        <?php
+            // Inclure le modèle de ingredient
+            require_once("./Modele/ingredient.php");
+            $ingredients = ingredient::getIngredients();
+            echo "<label>Choississez vos ingrédients :</label>";
+            // Pour chaque ingrédient dans l'ingrédient
+                foreach ($ingredients as $ingredient) {
+                    echo "<ul>";
+                    echo "<li>" . $ingredient['NomIngredient']. " : ";
+                    echo "<input type='number' name='nouvelleQuantiteCreation_{$ingredient['idIngredient']}' min='0' value='0'></li>";
+                    echo "</ul>";
+                }
+        ?>
+            
+
+
+
+            <button type="submit" name="validerCreationPizza" class="btn">Valider</button>
+        </form>
+        <a href="javascript:history.back()" class="btn">Retour</a>
+    </div>
+</main>

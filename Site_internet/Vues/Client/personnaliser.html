@@ -1,0 +1,87 @@
+<header>
+    <div id="En-tete">
+        <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+        <div id="slogan">
+            <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+        </div>
+        <?php 
+          // Récupérer le numéro de commande depuis la session
+          $numeroCommande = $_SESSION['numeroCommande'];
+          // Inclure le modèle de commande
+          require_once("./Modele/commande.php");
+          // Appeler la méthode
+          $quantite = commande::getQuantiteCommande($numeroCommande); 
+          // Créer un bouton pour consulter le panier
+          echo "<a href='routeur.php?controleur=controlleurObjet&action=panier' class='lien-panier'><img src='./Images/panier.png' alt='Icône du panier' class='panier-icon'><div class='vignette-nbArticle' id='nombreArticles'>" . $quantite . "</div></a>";
+        ?>
+        <div id="connexion">
+            <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="formulaire-Personnaliser">
+        <?php 
+            // Récupérer l'identifiant de la pizza choisie
+            $idPizza = $_GET['idPizza'];
+            // Vérifier si le formulaire a été soumis
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['validerChangements'])) {
+                // Récupérer l'identifiant du client depuis la session
+                $idClient = $_SESSION['idClient'];
+                // Récupérer le nom de la nouvelle pizza
+                $nomNouvellePizza = $_POST['nomPizza'];
+                // Récupérer la description de la nouvelle pizza
+                $descriptionNouvellePizza = $_POST['descriptionPizza'];
+                // Appeler les fichiers
+                require_once("./Modele/pizza.php");
+                require_once("./Modele/compose_de.php");
+                // Créer la pizza
+                pizza::creerPizzaPerso($nomNouvellePizza, $descriptionNouvellePizza, $idClient);
+                // Récupérer l'identifiant de la pizza créée
+                $idPizzaCree = pizza::getNumeroPizza($nomNouvellePizza, $idClient);
+                // Pour chaque ingrédient dans la pizza
+                foreach ($_POST as $key => $value) {
+                    if (strpos($key, 'quantite_') !== false) {
+                        $ingredientID = str_replace('quantite_', '', $key);
+                        $quantiteIngredient = $_POST['quantite_' . $ingredientID];
+                        compose_de::creerUneComposition($idPizzaCree, $ingredientID, $quantiteIngredient);
+                    }
+                }
+                // Récupérer le numéro de commande depuis la session
+                $numeroCommande = $_SESSION['numeroCommande'];
+                // Appeler le fichier
+                require_once("./Modele/commande_pizza.php");
+                commande_pizza::commanderPizza($idPizzaCree, $numeroCommande);
+            }
+
+            // AFFICHAGE DU FORMULAIRE
+            // Inclure le modèle de pizza
+            require_once("./Modele/pizza.php");
+            // Appeler les méthodes
+            $pizza = pizza::getDetailPizza($idPizza);
+            $ingredients = pizza::getIngredientPizza($idPizza);
+            echo "<h2>Créer votre nouvelle version de " . $pizza['NomPizza'] ."</h2>";
+            // Formulaire pour modifier la quantité d'ingrédients
+            echo "<form method='post' action='routeur.php?controleur=controlleurObjet&action=creerPersonnalisation&idPizza={$pizza['idPizza']}'>";
+                echo "<div class='un-element-formulaire'>";
+                    echo "<label for='nomPizza'>Nom de la nouvelle pizza :</label>";
+                    echo "<input type='text' name='nomPizza' required>";
+                echo "</div>";
+                echo "<div class='un-element-formulaire'>";
+                    echo "<label for='descriptionPizza'>Description de la nouvelle pizza :</label>";
+                    echo "<input type='text' name='descriptionPizza' required>";
+                echo "</div class='un-element-formulaire'>";
+                // Pour chaque ingrédient dans la pizza
+                foreach ($ingredients as $ingredient) {
+                    echo "<ul>";
+                    echo "<li>" . $ingredient['NomIngredient']. " : ";
+                    echo "<input type='number' name='quantite_{$ingredient['idIngredient']}' min='0' max='{$ingredient['QuantiteEnStockIngredient']}' value='{$ingredient['QuantiteDeIngredient']}'></li>";
+                    echo "</ul>";
+                }
+                echo "<button class='btn-formulaire' type='submit' name='validerChangements' >Valider les changements</button>";
+            echo "</form>";
+            echo "<a class='btn-formulaire' href='routeur.php?controleur=controlleurObjet&action=detailPizza&idPizza={$pizza['idPizza']}'>Retour</a>";
+        ?>
+    </div>
+</main>

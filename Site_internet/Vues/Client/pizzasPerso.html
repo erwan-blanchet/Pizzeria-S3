@@ -1,0 +1,59 @@
+<header>
+    <div id="En-tete">
+        <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+        <div id="slogan">
+          <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+        </div>
+        <?php 
+          // Récupérer le numéro de commande depuis la session
+          $numeroCommande = $_SESSION['numeroCommande'];
+          // Inclure le controleur de pizza
+          require_once("./Modele/commande.php");
+          // Appeler la méthodes
+          $quantite = commande::getQuantiteCommande($numeroCommande); 
+          // Créer un bouton pour consulter le panier
+          echo "<a href='routeur.php?controleur=controlleurObjet&action=panier' class='lien-panier'><img src='./Images/panier.png' alt='Icône du panier' class='panier-icon'><div class='vignette-nbArticle' id='nombreArticles'>" . $quantite . "</div></a>";
+        ?>
+        <div id="connexion">
+          <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+      </div>
+      </div>
+    </header>
+  
+    <main>
+      <h2>Vos pizzas personnalisées :</h2>
+      <div class="btn-choix">
+        <button>Trier par </button>
+        <div class="choix">
+            <a href="routeur.php?controleur=controlleurObjet&action=pizzasCroissantPerso">Prix croissant</a>
+            <a href="routeur.php?controleur=controlleurObjet&action=pizzasDecroissantPerso">Prix décroissant</a>
+            <a href="routeur.php?controleur=controlleurObjet&action=pizzasInverseAlphabetPerso">Ordre alphabétique inverse</a>
+        </div>
+      </div>    
+      <section id="article-Presentation">
+        <?php 
+          // Inclure le modèle de pizza
+          require_once("./Modele/pizza.php");
+          // Récupérer l'indentifiant du client depuis la session
+          $idClient = $_SESSION['idClient'];
+          // Appeler la méthodes
+          $pizzas = pizza::getPizzaPersoAlphabetique($idClient); 
+          // Pour chaque pizza renvoyée
+          foreach ($pizzas as $pizza) {
+            echo "<div class='article'>";
+              // Construction de l'image
+              $image = "<img class='img-Pizza' src='{$pizza->get('PhotoPizza')}' alt='Image de la pizza {$pizza->get('NomPizza')}'>";
+              // Afficher l'image
+              echo $image;
+              // Afficher le nom de la pizza en gras
+              echo "<div class='nom'>" . $pizza->get("NomPizza") . "</div>"; 
+              // Afficher le prix de la pizza en gras, rouge et moins grand
+              echo "<div class='prix'>" . $pizza->get("PrixPizza") . "€</div>"; 
+              // Afficher la description de la pizza en souligné
+              echo "<p class='description'>Description: </p>";
+              echo "<div class='description-text'>" . $pizza->get("DescriptionPizza") . "</div>"; 
+              echo "<a href='routeur.php?controleur=controlleurObjet&action=detailPizza&idPizza={$pizza->get('idPizza')}' class='boutton'>Commander</a>";
+            echo "</div>";
+          }
+        ?>
+    </main>

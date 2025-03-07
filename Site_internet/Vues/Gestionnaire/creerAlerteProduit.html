@@ -1,0 +1,34 @@
+<header>
+    <div id="En-tete">
+        <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+        <div id="slogan">
+            <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+        </div>
+        <div id="connexion">
+            <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+        </div>
+    </div>
+</header>
+    <main>
+        <div class="profilCreation">
+            <?php
+                // Inclure le modèle de produit
+                require_once("./Modele/produit.php");
+                // Récupérer l'identifiant du produit
+                $idProduit = $_GET['idProduit'];
+                // Récupérer les détails du produit
+                $produit = produit::getDetailProduit($idProduit);
+                echo "<h2> Créer une alerte sur " . $produit['NomProduit'] ."</h2>";
+                echo "<form action='./routeur.php?controleur=controlleurObjet&action=creerAlerteProduit&idProduit={$produit['idProduit']}' method='post'>";
+            ?>
+                <label for="nom">Nom de l'alerte :</label>
+                <input type="text" id="nom" name="nom" required>
+
+                <label for="quantiteMinimum">A partir de quelle quantité l'alerte se déclenche :</label>
+                <input type="number" id="quantiteMinimum" name="quantiteMinimum" required>
+
+                <button type="submit" name="valider" class="btn">Valider</button>
+            </form>
+            <a href="javascript:history.back()" class="btn">Retour</a>
+        </div>
+    </main>

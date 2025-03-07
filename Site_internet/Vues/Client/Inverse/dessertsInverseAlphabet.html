@@ -1,0 +1,57 @@
+  <header>
+    <div id="En-tete">
+      <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+      <div id="slogan">
+        <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+      </div>
+      <?php 
+        // Récupérer le numéro de commande depuis la session
+        $numeroCommande = $_SESSION['numeroCommande'];
+        // Inclure le controleur de pizza
+        require_once("./Modele/commande.php");
+        // Appeler la méthodes
+        $quantite = commande::getQuantiteCommande($numeroCommande); 
+        // Créer un bouton pour consulter le panier
+        echo "<a href='routeur.php?controleur=controlleurObjet&action=panier' class='lien-panier'><img src='./Images/panier.png' alt='Icône du panier' class='panier-icon'><div class='vignette-nbArticle' id='nombreArticles'>" . $quantite . "</div></a>";
+      ?>
+      <div id="connexion">
+        <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+      </div>
+    </div>
+  </header>
+  
+  <main class="presentation-articles">
+    <h2>Nos desserts:</h2>
+    <div class="btn-choix">
+      <button>Trier par </button>
+      <div class="choix">
+        <a href="routeur.php?controleur=controlleurObjet&action=dessertsClient">Ordre alphabétique</a>
+        <a href="routeur.php?controleur=controlleurObjet&action=dessertsCroissant">Prix croissant</a>
+        <a href="routeur.php?controleur=controlleurObjet&action=dessertsDecroissant">Prix décroissant</a>
+      </div>
+    </div>
+    <section class="article-Presentation">
+      <?php 
+        // Inclure le controleur de produit
+        require_once("./Modele/produit.php");
+        // Appeler la méthodes
+        $desserts = produit::getDessertInverseAlphabetique(); 
+        // Pour chaque dessert renvoyé
+        foreach ($desserts as $dessert) {
+          echo "<div class='article'>";
+            // Construction de l'image
+            $image = "<img class='img-Produit' src='{$dessert->get('PhotoProduit')}' alt='Image du dessert {$dessert->get('NomProduit')}'></a>";
+            // Afficher l'image
+            echo $image;
+            // Afficher le nom du dessert en gras
+            echo "<div class='nom'><h4>" . $dessert->get("NomProduit") . "</h4></div>"; 
+            // Afficher le prix du dessert en gras, rouge et moins grand
+            echo "<div class='prix'><h3>" . $dessert->get("PrixProduit") . "€</h3></div>"; 
+            // Afficher la description du dessert en souligné
+            echo "<div class='description-text'><u>Description :</u>    " . $dessert->get("DescriptionProduit") . "</div>"; 
+            echo "<a href='routeur.php?controleur=controlleurObjet&action=detailProduitClient&idProduit={$dessert->get('idProduit')}' class='boutton'>Commander</a>";
+          echo "</div>";
+        }
+      ?>
+    </section>
+  </main>

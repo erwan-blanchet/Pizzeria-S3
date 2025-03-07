@@ -1,0 +1,118 @@
+<header>
+    <div id="En-tete">
+        <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+        <div id="slogan">
+            <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+        </div>
+        <div id="connexion">
+            <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="tableau-Panier">
+        <ul class="onglet">
+            <!-- Titres des onglets -->
+            <?php
+                // Inclure le modèle de commande
+                require_once("./Modele/commande.php");
+                // Récupérer le numéro de commande depuis la session
+                $numeroCommande = $_SESSION['numeroCommande'];
+                // Récupérer les produits du panier
+                $produits = commande::getProduitPanier($numeroCommande);
+                // Récupérer les pizzas du panier
+                $pizzas = commande::getPizzaPanier($numeroCommande);
+
+                // Vérifier si le panier est vide
+        if (empty($produits) && empty($pizzas)) {
+            echo "<p>Panier vide</p>";
+        } else {
+                // Si aucun produit est commandé
+                if (!isset($produits) || empty($produits)) {
+                    echo "<li>Aucun produit dans le panier</li>";
+                } 
+                else {
+                    // Pour chaque produit renvoyée
+                    foreach ($produits as $produit) {
+                        if ($produit['QuantiteProduit'] > 0) {
+                        echo "<li><a title='{$produit['NomProduit']}' href='#contenu-{$produit['NomProduit']}'>" . $produit['QuantiteProduit'] . " " . $produit['NomProduit'] . "</a></li>";
+                    }
+                }
+                }
+                
+                // Si aucune pizza n'est commandée
+                if (!isset($pizzas) || empty($pizzas)) {
+                    echo "<li>Aucune pizza dans le panier</li>";
+                } 
+                else {
+                    // Pour chaque pizza commandée
+                    foreach ($pizzas as $pizza) {
+                        if ($pizza['QuantitePizza'] > 0) {
+                        echo "<li><a title='{$pizza['NomPizza']}' href='#contenu-{$pizza['NomPizza']}'>" . $pizza['QuantitePizza'] . " " . $pizza['NomPizza'] . "</a></li>";
+                        }
+                    }
+                }
+
+
+        echo "</ul>";
+        echo "<div class='details-Articles'>";
+            //Contenu des onglets
+
+                // Inclure le modèle de commande
+                require_once("./Modele/commande.php");
+                // Récupérer le numéro de commande depuis la session
+                $numeroCommande = $_SESSION['numeroCommande'];
+                // Récupérer les produits du panier
+                $produits = commande::getProduitPanier($numeroCommande);
+                foreach ($produits as $produit) {
+                    if ($produit['QuantiteProduit'] > 0) {
+                    echo "<section id='contenu-{$produit['NomProduit']}' class='contenu'>";
+                    echo "<h2>". $produit['NomProduit'] ."</h2>";
+                        echo "<img src='{$produit['PhotoProduit']}' alt='Image du produit {$produit['NomProduit']}'>";
+                        echo "<div class='prix-Article'>{$produit['PrixProduit']}€ </div>";
+                        echo "<div class='btn-panier-produit'>";
+                        echo "<a href='routeur.php?controleur=controlleurObjet&action=modifierQuantiteProduit&idProduit={$produit['idProduit']}' class='btn-Panier'>Modifier la quantité</a>";
+                        echo "<a href='routeur.php?controleur=controlleurObjet&action=detailProduit&idProduit={$produit['idProduit']}' class='btn-Panier'>Détails</a>";
+                        echo "<a href='routeur.php?controleur=controlleurObjet&action=supprimerCommandeProduit&idProduit={$produit['idProduit']}' class='btn-Panier'>Supprimer</a>";
+                        echo "</div>";
+                    echo "</section>";
+                    }
+                }
+                // Récupérer les pizzas du panier
+                $pizzas = commande::getPizzaPanier($numeroCommande);
+                foreach ($pizzas as $pizza) {
+                    if ($pizza['QuantitePizza'] > 0) {
+                    echo "<section id='contenu-{$pizza['NomPizza']}' class='contenu'>";
+                        echo "<h2>". $pizza['NomPizza'] ."</h2>";
+                            echo "<img src='{$pizza['PhotoPizza']}' alt='Image de la pizza {$pizza['NomPizza']}'>";
+                            echo "<div class='prix-Article'><h3>{$pizza['PrixPizza']}€ </h3></div>"; 
+                            echo "<div class='btn-panier-produit'>";
+                            echo "<a href='routeur.php?controleur=controlleurObjet&action=modifierQuantitePizza&idPizza={$pizza['idPizza']}' class='btn-Panier'>Modifier la quantité</a>";
+                            echo "<a href='routeur.php?controleur=controlleurObjet&action=detailPizza&idPizza={$pizza['idPizza']}' class='btn-Panier'>Détails</a>";
+                            echo "<a href='routeur.php?controleur=controlleurObjet&action=supprimerCommandePizza&idPizza={$pizza['idPizza']}' class='btn-Panier'>Supprimer</a>";
+                            echo "</div>";
+                    echo "</section>";
+                            }
+                }
+
+        echo "</div>";
+        echo "</div>";
+            echo "</section>";
+
+            // Inclure le modèle de commande
+            require_once("./Modele/commande.php");
+            // Récupérer le numéro de commande depuis la session
+            $numeroCommande = $_SESSION['numeroCommande'];
+            // Récupérer les informations sur la commande
+            $commande = commande::getPanier($numeroCommande);
+            echo "<p><strong>Montant total de la commande : </strong>{$commande['TotalCommande']}€</p>";
+            }
+        ?>
+        <div class="btn-panier-commande">
+            <a href="routeur.php?controleur=controlleurObjet&action=acceuilClient" class="btn">Retour</a>
+            <a href="routeur.php?controleur=controlleurObjet&action=payer" class="btn">Payer</a>
+        </div>
+        </section>
+    
+</main>

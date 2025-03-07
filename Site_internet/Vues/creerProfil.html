@@ -1,0 +1,125 @@
+    <main>
+        <div class="profilCreation">
+            <h2>Créer mon profil</h2>
+            <form action="./routeur.php?controleur=controlleurObjet&action=creerProfil" method="post">
+                <div class="un-element-formulaire">
+                    <label for="nom">Nom :</label>
+                    <input type="text" id="nom" name="nom" required>
+                </div>
+
+                <div class="un-element-formulaire">
+                    <label for="prenom">Prénom :</label>
+                    <input type="text" id="prenom" name="prenom">
+                </div>
+                
+                <div class="un-element-formulaire">
+                    <label for="email">Adresse mail :</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="un-element-formulaire">
+                    <label for="telephone">Numéro de téléphone :</label>
+                    <input type="tel" id="telephone" name="telephone" required>
+                </div>
+
+                <div class="un-element-formulaire">
+                    <label for="motDePasse">Mot de passe :</label>
+                    <input type="password" id="motDePasse" name="motDePasse" required>
+                </div>
+
+                <div class="un-element-formulaire">
+                    <label for="confirmationMotDePasse">Confirmer le mot de passe :</label>
+                    <input type="password" id="confirmationMotDePasse" name="confirmationMotDePasse" required>
+                </div>
+
+                <div class="un-element-formulaire">
+                    <label for="client">Client</label>
+                    <input type="checkbox" id="client" name="roleClient" value="client">
+
+                    <label for="gestionnaire">Gestionnaire</label>
+                    <input type="checkbox" id="gestionnaire" name="roleGestionnaire" value="gestionnaire">
+                </div>
+
+                <div id="clientDetails" style="display: none;">
+                    <label for="numero">Numéro de l'adresse :</label>
+                    <input type="text" id="numero" name="numero" required>
+
+                    <label for="suffixe">Suffixe de l'adresse :</label>
+                    <input type="text" id="suffixe" name="suffixe">
+
+                    <label for="complement">Complément de l'adresse :</label>
+                    <input type="text" id="complement" name="complement">
+
+                    <label for="nomRue">Nom de la rue :</label>
+                    <input type="text" id="nomRue" name="nomRue" required>
+
+                    <label for="codePostal">Code postal :</label>
+                    <input type="text" id="codePostal" name="codePostal" required>
+
+                    <label for="ville">Nom de la ville :</label>
+                    <input type="text" id="ville" name="ville" required>
+
+                    <label for="pays">Nom du pays :</label>
+                    <input type="text" id="pays" name="pays" required>
+                </div>
+
+                <div id="codeDiv" style="display: none;">
+                    <label for="code">Code :</label>
+                    <input type="text" id="code" name="code" required>
+                </div>
+
+                <button type="submit" class="btn" name="validerCreation">Valider</button>
+            </form>
+            <a href="javascript:history.back()" class="btn">Retour</a>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var clientCheckbox = document.getElementById('client');
+                    var gestionnaireCheckbox = document.getElementById('gestionnaire');
+                    var clientDetails = document.getElementById('clientDetails');
+                    var codeDiv = document.getElementById('codeDiv');
+            
+                    clientCheckbox.addEventListener('change', function () {
+                        if (this.checked) {
+                            clientDetails.style.display = 'block';
+                            codeDiv.style.display = 'none';
+                            // Activer les champs du formulaire client
+                            enableFields(clientDetails);
+                            // Désactiver les champs du formulaire gestionnaire
+                            disableFields(codeDiv);
+                        } else {
+                            clientDetails.style.display = 'none';
+                        }
+                    });
+            
+                    gestionnaireCheckbox.addEventListener('change', function () {
+                        if (this.checked) {
+                            clientDetails.style.display = 'none';
+                            codeDiv.style.display = 'block';
+                            // Activer les champs du formulaire gestionnaire
+                            enableFields(codeDiv);
+                            // Désactiver les champs du formulaire client
+                            disableFields(clientDetails);
+                        } else {
+                            codeDiv.style.display = 'none';
+                        }
+                    });
+            
+                    function enableFields(container) {
+                        var fields = container.querySelectorAll('input');
+                        fields.forEach(function (field) {
+                            field.removeAttribute('disabled');
+                        });
+                    }
+            
+                    function disableFields(container) {
+                        var fields = container.querySelectorAll('input');
+                        fields.forEach(function (field) {
+                            field.setAttribute('disabled', 'disabled');
+                        });
+                    }
+                });
+            </script>
+            
+        </div>
+    </main>

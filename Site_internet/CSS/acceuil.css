@@ -1,0 +1,151 @@
+/**************************
+**   Estelle BOISSERIE   **
+***************************/
+
+
+
+/* MISE EN PAGE DE LA PAGE D'ACCEUIL DU SITE INTERNET */
+
+main {
+    background-color: #F2D888;
+}
+
+#En-tete {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 20px;
+}
+
+#logo {
+    width: 20%; 
+}
+  
+#video_pub {
+    width: 100%;
+}
+
+#slogan {
+    flex-grow: 1; 
+    margin: 0 20px;
+    color : white; 
+}
+  
+#connexion a {
+    margin-left: auto; 
+    position: relative; 
+    justify-content: center;
+    color:black;
+    background : linear-gradient(#D90718, #D91438, #F0CE65, #F9E588);
+    padding : 14px 25px;
+    border-radius: 10px;
+    font-size: large;
+}
+
+#connexion span {
+    position:relative;
+    z-index:1;
+    color: white;
+}
+
+#connexion a::before{
+    content: "";
+    position: absolute;
+    inset: 1px;
+    background-color: black;
+    border-radius: 9px;
+    transition: 0.5s;
+}   
+
+#connexion a:hover::before{
+    opacity : 0.7;
+}
+
+.lien-panier {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 50px;
+}
+
+.panier-icon {
+    display: block;
+    width: 40px;
+    margin-right: 20px;
+}
+
+.vignette-nbArticle {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.A-la-une{
+    background-color: #F2D888;
+    margin: 100px 0px 200px 0px;
+    padding: 20px 10px;
+}
+
+.A-la-une_produits{
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.un-Article {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 60px 10px 10px 10px;
+    padding: 0px 20px 40px 20px;
+    width: 40%;
+    border-radius: 15px;
+    height: 50%;
+    position: relative;
+}
+
+.un-Article img {
+    height: 150px;
+    object-fit: cover;
+    margin-top: -50px;
+    border-radius: inherit;
+}
+
+
+.nom {
+    font-weight: bold;
+}
+
+.prix {
+    font-weight: bold;
+    color: red;
+}
+
+.description {
+    text-decoration: underline;
+    text-align: justify;
+}
+
+.description-text {
+    text-align: justify;
+}
+
+@media (max-width: 1200px) {
+    #En-tete {
+       flex-wrap: wrap;
+       align-items: center;
+    }
+}

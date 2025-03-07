@@ -1,0 +1,39 @@
+<header>
+    <div id="En-tete">
+        <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+        <div id="slogan">
+            <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+        </div>
+        <div id="connexion">
+            <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="profilCreation">
+        <h2 class="titre">Créer une alerte</h2>
+        <?php
+            // Inclure le modèle de ingredient
+            require_once("./Modele/ingredient.php");
+            // Récupérer l'identifiant de l'ingredient
+            $idIngredient = $_GET['idIngredient'];
+            // Récupérer les détails du produit
+            $ingredient = ingredient::getDetailIngredient($idIngredient);
+            echo "<h3> Créer une alerte sur " . $ingredient['NomIngredient'] ."</h3>";
+            echo "<form action='./routeur.php?controleur=controlleurObjet&action=creerAlerteIngredient&idIngredient={$ingredient['idIngredient']}' method='post'>";
+        ?>
+        <div class="un-element-formulaire">
+            <label for="nom">Nom de l'alerte :</label>
+            <input type="text" id="nom" name="nom" required>
+        </div>
+
+        <div class="un-element-formulaire">
+            <label for="quantiteMinimum">A partir de quelle quantité l'alerte se déclenche :</label>
+            <input type="number" id="quantiteMinimum" name="quantiteMinimum" required>
+        </div>
+            <button type="submit" name="valider" class="btn">Valider</button>
+        </form>
+        <a href="javascript:history.back()" class="btn">Retour</a>
+    </div>
+</main>

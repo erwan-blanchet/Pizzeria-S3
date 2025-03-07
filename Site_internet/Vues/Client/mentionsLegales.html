@@ -1,0 +1,66 @@
+    <header>
+        <div id="En-tete">
+            <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+            <div id="slogan">
+            <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+            </div>
+            <?php 
+                // Récupérer le numéro de commande depuis la session
+                $numeroCommande = $_SESSION['numeroCommande'];
+                // Inclure le controleur de pizza
+                require_once("./Modele/commande.php");
+                // Appeler la méthodes
+                $quantite = commande::getQuantiteCommande($numeroCommande); 
+                // Créer un bouton pour consulter le panier
+                echo "<a href='routeur.php?controleur=controlleurObjet&action=panier' class='lien-panier'><img src='./Images/panier.png' alt='Icône du panier' class='panier-icon'><div class='vignette-nbArticle' id='nombreArticles'>" . $quantite . "</div></a>";
+            ?>
+            <div id="connexion">
+                <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+            </div>
+        </div>
+    </header>
+
+   <main>
+        <div id="mentions">
+            <h3>Mentions Légales :</h3>
+            <article>
+                <h2>1. Informations générales</h2>
+                <p>Le site CroustilVintage est édité par RAKOTOMAVO Fanatitra, BLANCHET Erwan et BOISSERIE Estelle.</p>
+                <p>Siège social : <br> 13 avenue des sciences, Gif-sur-Yvette, 91190</p><br>
+                <p>Adresses mails : </p>
+                <ul>
+                    <li>fanatitra.rakotomavo@universite-paris-saclay.fr</li>
+                    <li>erwan.blanchet@universite-paris-saclay.fr</li>
+                    <li>estelle.boisserie@universite-paris-saclay.fr</li>
+                </ul>
+            </article>
+            <article>
+                <h2>2. Hébergement du site</h2>
+                <p>Le site est hébergé par l'IUT d'Orsay, dont le siège social est situé au 13 avenue des sciences à Gif-sur-Yvette.</p>
+            </article>
+            <article>
+                <h2>3. Conditions générales de vente</h2>
+                <p>Les conditions générales de vente (CGV) régissent l'utilisation du site CroustilVintage et les conditions d'achat en ligne. Elles sont accessibles <a href="CGV.html">ici</a>t doivent être acceptées par l'utilisateur avant toute transaction. </p>
+            </article>
+            <article>
+                <h2>4. Paiements en ligne</h2>
+                <p>Les paiements en ligne sont sécurisés et traités en garantissant la confidentialité des informations bancaires.</p>
+            </article>
+            <article>
+                <h2>5. Collecte de données personnelles</h2>
+                <p>Les informations personnelles collectées lors de l'achat en ligne sont traitées conformément à notre politique de confidentialité, disponible via votre profil client.</p>
+            </article>
+            <article>
+                <h2>6. Propriété intellectuelle</h2>
+                <p>Le contenu du site, y compris les images, textes, logos, et autres éléments, est la propriété exclusive de CroustilVintage et est protégé par les lois sur la propriété intellectuelle.</p>
+            </article>
+            <article>
+                <h2>7. Réclamations et litiges</h2>
+                <p>En cas de réclamation ou de litige, veuillez contacter notre service clientèle à l'adresse ou par téléphone.</p>
+            </article>
+            <article>
+                <h2>8. Loi applicable</h2>
+                <p>Les présentes mentions légales sont régies par le droit français. Tout litige relatif à l'utilisation du site ou à une transaction en ligne sera soumis à la compétence exclusive des tribunaux français.</p>
+            </article>
+        </div>
+    </main>

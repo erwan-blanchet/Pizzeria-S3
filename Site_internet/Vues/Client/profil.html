@@ -1,0 +1,28 @@
+    <main>
+        <div class="profil">
+            <h2>Mon profil</h2>
+            <div class="info-Profil">
+                <?php
+                    // Récupérer les informations du client depuis la session
+                    $infoClient = $_SESSION['infoClient'];
+                    // Afficher les informations du client
+                    echo "<p><strong>Nom : </strong>" . $infoClient['Nom'] . "</p>";
+                    echo "<p><strong>Prénom : </strong>" . $infoClient['Prenom'] . "</p>";
+                    echo "<p><strong>Adresse e-mail : </strong>" . $infoClient['AdresseMail'] . "</p>";
+                    echo "<p><strong>Numéro de téléphone : </strong>" . $infoClient['NumeroTelephone'] . "</p>";
+                    echo "<p><strong>Adresse : </strong>" . $infoClient['Numero'] . " " . $infoClient['SuffixeAdresse'] . " " . $infoClient['NomRue'] . ", "  . $infoClient['NomVille'] . ", "  . $infoClient['CodePostal'] . ", " . $infoClient['NomPays'] . "</p>";
+                ?>
+            </div>
+            <div class="btn-profil">
+                <a class="btn-formulaire" href="">Modifier mon profil</a>
+                <a class="btn-formulaire" href="routeur.php?controleur=controleurObjet&action=deconnecterClient">Se déconnecter</a>
+                <a class="btn-formulaire" href='routeur.php?controleur=controlleurObjet&action=commande'>Consulter mes commandes</a>
+                <a class="btn-formulaire" href="javascript:history.back()">Retour</a>
+            </div>
+        </div>
+    </main>
+    
+    
+
+
+    

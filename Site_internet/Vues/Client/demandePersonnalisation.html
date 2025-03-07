@@ -1,0 +1,40 @@
+<header>
+    <div id="En-tete">
+        <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+        <div id="slogan">
+            <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+        </div>
+        <?php 
+          // Récupérer le numéro de commande depuis la session
+          $numeroCommande = $_SESSION['numeroCommande'];
+          // Inclure le modèle de commande
+          require_once("./Modele/commande.php");
+          // Appeler la méthode
+          $quantite = commande::getQuantiteCommande($numeroCommande); 
+          // Créer un bouton pour consulter le panier
+          echo "<a href='routeur.php?controleur=controlleurObjet&action=panier' class='lien-panier'><img src='./Images/panier.png' alt='Icône du panier' class='panier-icon'><div class='vignette-nbArticle' id='nombreArticles'>" . $quantite . "</div></a>";
+        ?>
+        <div id="connexion">
+            <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="contenu-page">
+        <?php 
+            // Récupérer l'identifiant de la pizza choisit
+            $idPizza = $_GET['idPizza'];
+            // Inclure le modèle de pizza
+            require_once("./Modele/pizza.php");
+            // Appeler la méthode
+            $pizza = pizza::getDetailPizza($idPizza); 
+            echo "<h2 class='nom-Article'>Souhaitez-vous personnaliser les ingrédients de votre pizza " . $pizza['NomPizza'] . " ?</h2>";
+            echo "<div class='btn-proposes'>";
+                echo "<a class='btn' href='javascript:history.back()'>Annuler</a>";
+                echo "<a class='btn' href='routeur.php?controleur=controlleurObjet&action=pizzaCommande&idPizza={$pizza['idPizza']}'>Commander sans personnaliser</a>";
+                echo "<a class='btn' href='routeur.php?controleur=controlleurObjet&action=personnaliserPizza&idPizza={$pizza['idPizza']}'>Personnaliser</a>";
+            echo "</div>";      
+        ?>
+    </div>
+</main>

@@ -1,0 +1,27 @@
+<main>
+    <div class="profil">
+        <h2>Mon profil</h2>
+        <div class="info-Profil">
+            <?php
+                // Récupérer les informations du gestionnaire depuis la session
+                $infoGestionnaire = $_SESSION['infoGestionnaire'];
+                // Afficher les informations du gestionnaire
+                echo "<p><strong>Nom : </strong>" . $infoGestionnaire['Nom'] . "</p>";
+                echo "<p><strong>Prénom : </strong>" . $infoGestionnaire['Prenom'] . "</p>";
+                echo "<p><strong>Adresse e-mail : </strong>" . $infoGestionnaire['AdresseMail'] . "</p>";
+                echo "<p><strong>Numéro de téléphone : </strong>" . $infoGestionnaire['NumeroTelephone'] . "</p>";
+            ?>
+        </div>
+        <table>
+            <tr>
+                <td><a class="btn-formulaire" href="">Modifier mon profil</a></td>
+                <td><a class="btn-formulaire" href="routeur.php?controleur=controleurObjet&action=deconnecterGestionnaire">Se déconnecter</a></td>
+                <td><a class="btn-formulaire" href="routeur.php?controleur=controlleurClient&action=acceuilGestionnaire">Retour</a></td>
+            </tr>
+        </table>
+    </div>
+</main>
+
+
+
+

@@ -1,0 +1,51 @@
+/**************************
+**   Estelle BOISSERIE   **
+***************************/
+
+
+
+/* MISE EN PAGE DE LA PAGE DE DETAIL */
+.nom-Article {
+    text-align: center;
+}
+
+.contenu-detail {
+    background-color: white;
+    padding: 100px 0px;
+    text-align: center;
+}
+
+.prix-Article {
+    color:red;
+    font-size: large;
+}
+
+.contenu-detail table {
+    border-collapse: separate;
+    border-spacing: 10px; 
+}
+  
+.contenu-detail td {
+    padding: 40px 10px;
+    text-align: justify;
+}
+
+.btn {
+    border: 0;
+    background: linear-gradient(90deg, #D90718, #D91438);
+    color: #f8f8f8;
+    padding: 10px 50px;
+    border-radius: 40px;
+    margin: 20px;
+    bottom: 10px;
+    text-decoration: none;
+    font-size: 20px;
+}
+  
+.titre {
+    text-align: center;
+}
+
+.img-presentation-detail {
+    width: 60%;
+}

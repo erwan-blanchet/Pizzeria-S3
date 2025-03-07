@@ -1,0 +1,30 @@
+<header>
+    <div id="En-tete">
+        <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+        <div id="slogan">
+            <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+        </div>
+        <div id="connexion">
+            <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="profilCreation">
+        <h2>Créer une pizza</h2>
+        <form action="./routeur.php?controleur=controlleurObjet&action=creationIngredientGestionnaire" method="post" enctype="multipart/form-data">
+            <label for="nomCreationIngredient">Nom de l'ingredient :</label>
+            <input type="text" id="nomCreationIngredient" name="nomCreationIngredient" required>
+
+            <label for="prixAchat">Prix d'achat :</label>
+            <input type="number" id="prixAchat" name="prixAchat" required>
+
+            <label for="imageCreationIngredient">Choisir une image :</label>
+            <input type="file" id="imageCreationIngredient" name="imageCreationIngredient" accept="image/png">
+
+            <button type="submit" name="validerCreationIngredient" class="btn">Valider</button>
+        </form>
+        <a href="javascript:history.back()" class="btn">Retour</a>
+    </div>
+</main>

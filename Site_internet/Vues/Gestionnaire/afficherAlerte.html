@@ -1,0 +1,71 @@
+<header>
+    <div id="En-tete">
+        <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+        <div id="slogan">
+            <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+        </div>
+        <div id="connexion">
+            <a href="routeur.php?controleur=controlleurObjet&action=profilClient"><span>Mon profil</span></a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="contenu-page">
+        <? php
+        <div class="contenu-page">
+            <?php
+            echo "<table class='en-tete-tbl-alertes'>";
+            echo "<thead>";
+            echo "<tr>";
+            echo "<th>";
+            // Vérifiez si la variable de session existe
+            echo "<h2 class='nom-Article'>Vos Alertes</h2>";
+            if (isset($_SESSION['alerte_trigger'])) {
+                // Affichez l'alerte
+                echo '<div class="alert">' . $_SESSION['alerte_trigger'] . '</div>';
+                
+                // Supprimez la variable de session car vous avez déjà affiché l'alerte
+                unset($_SESSION['alerte_trigger']);
+            } else {
+                echo "Vous n'avez aucune alerte.";
+            }
+            echo "</th>";
+            echo "</tr>";
+            echo "</thead>";
+            echo "<tbody>";
+
+                // Inclure le modèle 
+                require_once("./Modele/ingredient.php");
+                require_once("./Modele/produit.php");
+            // Récupérer les alertes pour Ingredient
+            $alertesIngredient = ingredient::afficherAlerteIngredient();
+        
+            // Récupérer les alertes pour Produit
+            $alertesProduit = produit::afficherAlerteProduit();
+            echo "<tr>";
+            echo "<td>";
+            echo "<h2>Liste des Alertes pour Ingredient</h2>";
+            echo "<ul>";
+            foreach ($alertesIngredient as $alerte) {
+                echo "<li>" .  $alerte['Trigger'] . "</li>";
+            }
+            echo "</ul>";
+            echo "</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td>";
+            echo "<h2>Liste des Alertes pour Produit</h2>";
+            echo "<ul>";
+            foreach ($alertesProduit as $alerte) {
+                echo '<li>' . $alerte['Trigger'] . '</li>';
+            }
+            echo "</ul>";
+            echo "</td>";
+            echo "</tr>";
+            echo "</tbody>";
+            echo "</table>";
+            ?>
+        </div>
+
+</main>

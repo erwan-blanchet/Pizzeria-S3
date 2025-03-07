@@ -1,0 +1,40 @@
+<header>
+    <div id="En-tete">
+        <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+        <div id="slogan">
+          <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+        </div>
+        <div id="connexion">
+          <a href="routeur.php?controleur=controleurObjet&action=connexion" title="Vous pourrez créer un compte ou vous connecter à votre compte"><span>Se connecter</span></a>
+      </div>
+      </div>
+    </header>
+  
+    <main>
+      <section class="A-la-une">
+        <h2>Nos desserts:</h2>
+        <div class="A-la-une_produits">
+          <?php 
+            // Inclure le modèle de produit
+            require_once("./Modele/produit.php");
+            // Appeler la méthodes
+            $desserts = produit::getDessertAlphabetique(); 
+            // Pour chaque dessert renvoyé
+            foreach ($desserts as $dessert) {
+                echo "<div class='un-Article'>";
+                // Construction de l'image
+                $image = "<img src='{$dessert->get('PhotoProduit')}' alt='Image du dessert {$dessert->get('NomProduit')}'>";
+                // Afficher le lien
+                echo $image;
+                // Afficher le nom du dessert en gras
+                echo "<div class='nom'><h4>" . $dessert->get("NomProduit") . "</h4></div>"; 
+                // Afficher le prix du dessert en gras, rouge et moins grand
+                echo "<div class='prix'><h3>" . $dessert->get("PrixProduit") . "€</h3></div>"; 
+                // Afficher la description du dessert en souligné
+                echo "<div class='description-text'><u>Description :</u>    " . $dessert->get("DescriptionProduit") . "</div>"; 
+                echo "</div>";
+            }
+          ?>
+        </div>
+      </section>
+    </main>

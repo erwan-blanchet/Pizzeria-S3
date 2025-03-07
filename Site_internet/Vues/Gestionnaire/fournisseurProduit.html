@@ -1,0 +1,39 @@
+    <header>
+        <div id="En-tete">
+            <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+            <div id="slogan">
+                <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+            </div>
+            <div id="connexion">
+                <a href="routeur.php?controleur=controlleurObjet&action=profilGestionnaire"><span>Mon profil</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="contenu-detail">
+            <?php
+                // Inclure le modèle de fournisseur
+                require_once("./Modele/fournisseur.php");
+                // Récupérer l'identifiant du produit
+                $idProduit = $_GET['idProduit'];
+                // Récupérer les détails du fournisseur
+                $fournisseurDetails = fournisseur::getFournisseur($idProduit);
+                echo "<h2 class='nom-Article'>Votre(s) fournisseur(s)</h2>";
+                // Pour chaque fournisseur renvoyée
+                foreach ($fournisseurDetails as $fournisseur) {
+                    echo "<h3>" . $fournisseur['NomFournisseur'] . "</h3>";
+                    echo "<ul class='infos-fournisseur'>";
+                        echo "<li><u>Numéro de téléphone fournisseur :</u> <a href='tel:" . $fournisseur['TelephoneFournisseur'] . "'>" . $fournisseur['TelephoneFournisseur'] . "</a></li>";
+                        echo "<li><u>Adresse e-mail fournisseur :</u> <a href='mailto:" . $fournisseur['EmailFournisseur'] . "'>" . $fournisseur['EmailFournisseur'] . "</a></li>";
+                        echo "<li><u>Site web fournisseur :</u> <a href='" . $fournisseur['SiteInternet'] . "' target='_blank'>" . $fournisseur['SiteInternet'] . "</a></li>";
+                        echo "<li><u>Adresse : </u>" . $fournisseur['Numero'] . " " . $fournisseur['SuffixeAdresse'] . " " . $fournisseur['NomRue'] . ", "  . $fournisseur['NomVille'] . ", "  . $fournisseur['CodePostal'] . ", " . $fournisseur['NomPays'] . "</li>";
+                    echo "</ul>";
+                }
+            ?>
+            <a href="javascript:history.back()" class="btn">Retour</a>
+        </div>
+    </main>
+
+
+    

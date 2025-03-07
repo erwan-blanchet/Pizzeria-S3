@@ -1,0 +1,14 @@
+ 
+  <div id="formulaire">
+    <h2>Connexion</h2>
+    <form id="formulaire-connexion" method="post" action="./routeur.php?controleur=controlleurObjet&action=connecter">
+      <div class="saisit">
+        <input type="text" id="mail" name="mail" placeholder="Adresse Mail" required>
+      </div>
+      <div class="saisit">
+        <input type="password" id="mot_de_passe" name="mot_de_passe" placeholder="Mot de passe" required>
+      </div>
+      <button id="bouton_connexion" type="submit" >Se connecter</button>
+    </form>
+    <p>Vous n'avez pas de compte ? <a href="./routeur.php?controleur=controlleurObjet&action=creationProfil">Créer mon compte</a></p>
+  </div>

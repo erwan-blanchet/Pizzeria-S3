@@ -1,0 +1,61 @@
+    <header>
+        <div id="En-tete">
+            <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+            <div id="slogan">
+                <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+            </div>
+            <div id="connexion">
+                <a href="routeur.php?controleur=controlleurObjet&action=profilGestionnaire"><span>Mon profil</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="contenu-detail">
+            <?php
+                // Inclure le modèle de pizza
+                require_once("./Modele/pizza.php");
+                // Récupérer l'identifiant de la pizza
+                $idPizza = $_GET['idPizza'];
+                // Récupérer les détails de la pizza
+                $pizzaDetails = pizza::getDetailPizza($idPizza);
+            ?>
+            <h2 class="nom-Article"><?php echo $pizzaDetails['NomPizza']; ?></h2>
+            <table>
+                <tr>
+                    <td><?php 
+                        $image = "<img src='{$pizzaDetails['PhotoPizza']}' alt='Image de la pizza {$pizzaDetails['NomPizza']}' class='img-presentation-detail'>";
+                        echo $image; 
+                        ?>
+                    </td>
+                    <td><div class="prix-Article"><?php echo $pizzaDetails['PrixPizza']; ?>€ </div><u>Description :</u> <?php echo $pizzaDetails['DescriptionPizza']; ?></td>
+                </tr>
+                <tr>
+                    <td><p><em>Cette image est une représentation et n'engage pas le résultat.</em></p></td>
+                    <td>La pizza est composé de : 
+                        <ul>
+                            <?php 
+                                // Inclure le modèle de pizza
+                                require_once("./Modele/pizza.php");
+                                // Appeler la méthodes
+                                $ingredients = pizza::getIngredientPizza($idPizza);
+                                // Pour chaque pizza renvoyée
+                                foreach ($ingredients as $ingredient) {
+                                    echo "<li><a href='routeur.php?controleur=controlleurObjet&action=detailIngredient&idIngredient={$ingredient['idIngredient']}'>" . $ingredient['QuantiteDeIngredient'] . " " . $ingredient['NomIngredient'] . "</a></li>";
+
+                                }
+                            ?>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+            <div class="btn-panier-commande">
+                <?php 
+                    require_once("./Modele/pizza.php");
+                    $pizza = pizza::getDetailPizza($idPizza);
+                    echo "<a href='routeur.php?controleur=controlleurObjet&action=supprimerPizzaGestionnaire&idPizza={$pizza['idPizza']}' class='btn'>Supprimer la recette</a>";
+                ?>
+                <a href="javascript:history.back()" class="btn">Retour</a>
+            </div>
+        </div>
+    </main>

@@ -1,0 +1,19 @@
+<div class="sidebar">
+    <button class="bouton-menu" onclick="ouvrirMenu()"></button>
+    <div class="menu">
+      <nav>
+        <a href="routeur.php?controleur=controlleurObjet&action=acceuilClient" class="bouton">Acceuil</a>
+        <a href="routeur.php?controleur=controlleurObjet&action=pizzasClient" class="bouton">Nos pizzas</a>
+        <a href="routeur.php?controleur=controlleurObjet&action=pizzasClientPerso" class="bouton">Vos pizzas personnalisées</a>
+        <a href="routeur.php?controleur=controlleurObjet&action=dessertsClient" class="bouton">Nos desserts</a>
+        <a href="routeur.php?controleur=controlleurObjet&action=boissonsClient" class="bouton">Nos boissons</a>
+        <a href="routeur.php?controleur=controlleurObjet&action=histoireClient" class="bouton">Notre histoire</a>
+        <a href="routeur.php?controleur=controleurObjet&action=mentionsLegalesClient" class="bouton">Mentions légales</a>
+        <a href="routeur.php?controleur=controleurObjet&action=cgvClient" class="bouton">CGV & Livraisons</a>
+      </nav>
+    </div>
+    <script>
+      const ouvrirMenu = () => document.body.classList.toggle("open");
+    </script>
+  </div>
+

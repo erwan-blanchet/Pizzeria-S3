@@ -1,0 +1,16 @@
+<footer>
+    <ul id="menu-footer">
+        <li><a href="routeur.php?controleur=controlleurObjet&action=acceuilGestionnaire" class="bouton">Acceuil</a></li>
+        <li><a href="routeur.php?controleur=controlleurObjet&action=recettesGestionnaire" class="bouton">Les recettes</a></li>
+        <li><a href="routeur.php?controleur=controlleurObjet&action=stocksGestionnaire" class="bouton">Les stocks</a></li>
+        <li><a href="routeur.php?controleur=controlleurObjet&action=alerteCreer" class="bouton">Les alertes</a></li>
+        <?php
+          // Récupérer l'année en cours
+          $anneeEnCours = date("Y");
+          echo "<li><a href='routeur.php?controleur=controlleurObjet&action=statistiquesGestionnaire&idStatistique=$anneeEnCours' class='bouton'>Les statistiques</a></li>";
+        ?>
+    </ul>
+    <p class="copyright">CroustilVintage Fast&Hot © 2024</p>
+  </footer>
+</body>
+</html>

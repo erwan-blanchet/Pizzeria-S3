@@ -1,0 +1,50 @@
+    <header>
+        <div id="En-tete">
+            <img src="./Images/logo.png" alt="Logo du site web" id="logo">
+            <div id="slogan">
+            <h1>Une pizza rétro, c'est toujours à la mode-za</h1>
+            </div>
+            <div id="connexion">
+                <a href="routeur.php?controleur=controlleurObjet&action=profilGestionnaire"><span>Mon profil</span></a>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="contenu-page">
+            <?php 
+                // Inclure le modèle de statistique
+                require_once("./Modele/statistique.php");
+                // Appeler la méthodes
+                $idStatistiques = statistique::getStatistiqueId(); 
+                // Récupérer l'identifiant de la statistique
+                $idStatistiqueURL = $_GET['idStatistique'];
+                echo "<div class='btn-choix'>";
+                    echo "<button>" . $idStatistiqueURL. "</button>";
+                    echo "<div class='choix'>";
+                    // Pour chaque statistique renvoyée
+                    foreach ($idStatistiques as $idStatistique) {
+                        echo "<a href='routeur.php?controleur=controlleurObjet&action=statistiquesGestionnaire&idStatistique={$idStatistique['idStatistique']}'>" . $idStatistique["idStatistique"] . "</a>";
+                    }           
+                    echo "</div>";
+                echo "</div>" ;
+                echo "<h2>Les statistiques de l'année " . $idStatistique["idStatistique"] . " :</h2>";
+                echo "<div class='statistiques'>";
+                // Récupérer les statistiques de l'année souhaitée
+                $statistiques = statistique::getStatistique($idStatistiqueURL);
+                // Si aucune statistique est renvoyée
+                if (!isset($statistiques) || empty($statistiques)) {
+                    echo "<li>Aucune statistique enregistré pour le moment</li>";
+                } 
+                else {
+                    // Pour chaque statistique renvoyée
+                    foreach ($statistiques as $statistique) {
+                        echo "<li><strong>Chiffre d'affaires mensuel : </strong>"  . $statistique['ChiffreDAffairesMensuel'] . "€</li>";
+                        echo "<li><strong>Chiffre d'affaires hebdommadaire : </strong>"  . $statistique['ChiffreDAffairesHebdomadaire'] . "€</li>";
+                        echo "<li><strong>Chiffre d'affaires journalier : </strong>"  . $statistique['ChiffreDAffairesJournalier'] . "€</li>";
+                    }
+                }
+                echo "</div>" ;
+            ?>
+        </div>
+    </main>
