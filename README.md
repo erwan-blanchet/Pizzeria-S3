@@ -7,4 +7,3 @@ Le site web a été développé en HTML, CSS, JavaScript et PHP, tandis qu'une a
 
 Nous avons réalisé une analyse fonctionnelle, une analyse détaillée, une planification de projet et une maquette, le tout réuni dans un dossier d'analyse. Les systèmes ont été interconnectés à une base de données développée en SQL et PL/SQL via phpMyAdmin.
 
-**Attention :** Tout le code contenu dans ce dépôt est la propriété exclusive de BOISSERIE Estelle. Vous êtes libre de consulter et d'explorer le code, mais **vous n'êtes pas autorisé à le copier, le modifier, ou l'utiliser à des fins commerciales sans mon autorisation explicite**.
